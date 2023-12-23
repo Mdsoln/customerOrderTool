@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * This class holds customer details and interact with database
  * Before a user will need to have an account to make any order
@@ -25,4 +27,7 @@ public class Customer {
       private String customerName;
       @Column(name = "email",nullable = false)
       private String customerEmail;
+
+      @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+      private List<Order> orders;
 }
