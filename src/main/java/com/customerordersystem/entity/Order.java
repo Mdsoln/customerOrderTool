@@ -20,7 +20,7 @@ public class Order {
     @Column(name = "id",nullable = false)
     private Long orderId;
     @Column(name = "date",nullable = false)
-    private LocalDate orderDate;
+    private String orderDate;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
