@@ -1,4 +1,4 @@
-package com.customerordersystem.service;
+package com.customerordersystem.service.query;
 
 import com.customerordersystem.exc.GlobalException;
 import com.customerordersystem.repo.CustomerRepo;
