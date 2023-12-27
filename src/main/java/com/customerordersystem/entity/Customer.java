@@ -30,4 +30,7 @@ public class Customer {
 
       @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
       private List<Order> orders;
+
+      @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.EAGER)
+      private List<Contact> contacts;
 }

@@ -23,6 +23,10 @@ public class Product {
     private String productName;
     @Column(name = "price",nullable = false)
     private float productPrice;
+    @Column(name = "quantity",nullable = false)
+    private int productQuantity;
+    @Column(name = "description",nullable = false)
+    private String productDescription;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     private List<Order> orderList;
