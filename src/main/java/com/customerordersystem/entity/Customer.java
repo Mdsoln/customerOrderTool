@@ -1,5 +1,6 @@
 package com.customerordersystem.entity;
 
+import com.customerordersystem.dto.roles.UserRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,12 @@ public class Customer {
       private String customerName;
       @Column(name = "email",nullable = false)
       private String customerEmail;
+
+      @Column(name = "psw",nullable = false)
+      private String customerPsw;
+
+      @Enumerated(value = EnumType.STRING)
+      private UserRoles roles;
 
       @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
       private List<Order> orders;

@@ -1,5 +1,6 @@
 package com.customerordersystem.entity;
 
+import com.customerordersystem.dto.roles.UserRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,12 @@ public class Supplier {
 
     @Column(name = "email",nullable = false)
     private String supplierEmail;
+
+    @Column(name = "psw",nullable = false)
+    private String supplierPsw;
+
+    @Enumerated(value = EnumType.STRING)
+    private UserRoles roles;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.EAGER)
     private List<Contact> contacts;
