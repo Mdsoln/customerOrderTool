@@ -1,11 +1,11 @@
 package com.customerordersystem.entity;
 
+import com.customerordersystem.dto.constants.ContactType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
 @Table(name = "contact")
@@ -18,11 +18,17 @@ public class Contact {
     @Column(name = "id",nullable = false)
     private Long contact_id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "customer_id",referencedColumnName = "id")
-    private List<Customer> customer;
+    private String contacts;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "contact_type", nullable = false)
+    private ContactType contactType;
+
+    @OneToOne
+    @JoinColumn(name = "customer_id",referencedColumnName = "id")
+    private Customer customer;
+
+    @OneToOne
     @JoinColumn(name = "supplier_id",referencedColumnName = "id")
-    private List<Supplier> supplier;
+    private Supplier supplier;
 }

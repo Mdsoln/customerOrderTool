@@ -1,11 +1,9 @@
 package com.customerordersystem.service.impl;
 
 import com.customerordersystem.dto.CustomerRequest;
-import com.customerordersystem.entity.Contact;
 import com.customerordersystem.entity.Customer;
 import com.customerordersystem.entity.Order;
 import com.customerordersystem.entity.Product;
-import com.customerordersystem.repo.ContactRepo;
 import com.customerordersystem.repo.OrderRepo;
 import com.customerordersystem.service.inter.OrderInterface;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +18,6 @@ public class OrderService implements OrderInterface {
     private final CustomerService customerService;
     private final OrderRepo orderRepo;
     private final EmailService emailService;
-    private final ContactRepo contactRepo;
     @Override
     public void saveOrders(CustomerRequest customerRequest) {
 
@@ -39,11 +36,6 @@ public class OrderService implements OrderInterface {
         order.setCustomer(customer);
         order.setProduct(product);
         orderRepo.save(order);
-
-//        saving phone numbers of customer in contact table
-        Contact contact = new Contact();
-        contact.setCustomer(customerRequest.getMobile_numbers());
-        contactRepo.save(contact);
 
 //        passing details to mail service class inorder to send message to supplier
         emailService.SendAlertToSupplierAfterOrders(customerRequest);

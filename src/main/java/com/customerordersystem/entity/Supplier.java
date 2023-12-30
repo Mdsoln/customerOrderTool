@@ -1,12 +1,10 @@
 package com.customerordersystem.entity;
 
-import com.customerordersystem.dto.roles.UserRoles;
+import com.customerordersystem.dto.constants.UserRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name = "supplier")
@@ -34,6 +32,6 @@ public class Supplier {
     @Enumerated(value = EnumType.STRING)
     private UserRoles roles;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.EAGER)
-    private List<Contact> contacts;
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "supplier",fetch = FetchType.EAGER)
+    private Contact contacts;
 }

@@ -13,6 +13,17 @@ spring:
         format-sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 25
+    username: 'supplier@gmail.com'
+    password: supplier
+    properties:
+      mail:
+        smtp:
+          auth: plain
+          starttls:
+            enable: true
 server:
   error:
     include-message: always

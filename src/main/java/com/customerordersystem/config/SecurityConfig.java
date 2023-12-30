@@ -22,8 +22,8 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder(10);
+    public static PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -33,8 +33,9 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests((authorise)->
                         authorise
-                                .requestMatchers("")
+                                .requestMatchers("/api/purchase")
                                 .permitAll()
+                                .anyRequest().authenticated()
                 ).formLogin(
                         form->
                                 form
@@ -57,9 +58,9 @@ public class SecurityConfig {
     }
 
     @Autowired
-    public void configGlobal(AuthenticationManagerBuilder auth) throws Exception {
-       auth
-               .userDetailsService(userDetailsService)
-               .passwordEncoder(passwordEncoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 }

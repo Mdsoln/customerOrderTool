@@ -1,6 +1,6 @@
 package com.customerordersystem.entity;
 
-import com.customerordersystem.dto.roles.UserRoles;
+import com.customerordersystem.dto.constants.UserRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,8 +24,10 @@ public class Customer {
       @GeneratedValue(strategy = GenerationType.IDENTITY)
       @Column(name = "id",nullable = false)
       private Long customerId;
+
       @Column(name = "name",nullable = false)
       private String customerName;
+
       @Column(name = "email",nullable = false)
       private String customerEmail;
 
@@ -38,6 +40,6 @@ public class Customer {
       @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
       private List<Order> orders;
 
-      @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.EAGER)
-      private List<Contact> contacts;
+      @OneToOne(cascade = CascadeType.ALL,mappedBy = "customer",fetch = FetchType.EAGER)
+      private Contact contact;
 }

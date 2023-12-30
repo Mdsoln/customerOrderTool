@@ -1,4 +1,4 @@
-package com.customerordersystem.dto.roles;
+package com.customerordersystem.dto.constants;
 
 
 public enum UserRoles {

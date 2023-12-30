@@ -17,7 +17,6 @@ public class EmailService {
         mailMessage.setTo("supplierEmail@gmail.com");
         mailMessage.setText("Customer: "+customerRequest.getCustomerName()+ " with email "+
               customerRequest.getCustomerEmail() + " has ordered product "+customerRequest.getProductName());
-
         javaMailSender.send(mailMessage);
     }
 }

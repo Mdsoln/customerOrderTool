@@ -1,6 +1,6 @@
 package com.customerordersystem.service.secure;
 
-import com.customerordersystem.dto.roles.UserRoles;
+import com.customerordersystem.dto.constants.UserRoles;
 import com.customerordersystem.entity.Customer;
 import com.customerordersystem.entity.Supplier;
 import com.customerordersystem.repo.CustomerRepo;
