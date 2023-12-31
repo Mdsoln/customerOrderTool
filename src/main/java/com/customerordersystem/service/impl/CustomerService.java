@@ -11,6 +11,7 @@ import com.customerordersystem.service.inter.CustomerInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 
 @Service
@@ -22,29 +23,33 @@ public class CustomerService implements CustomerInterface {
     private final PasswordEncoder passwordEncoder;
     @Override
     public Customer retrieveCustomer(CustomerRequest customerRequest) {
-        if (customerRequest.getCustomerEmail() == null){
-            throw new GlobalException("Email cannot be null");
+        if (StringUtils.isEmptyOrWhitespace(customerRequest.getCustomerEmail())||StringUtils.isEmptyOrWhitespace(customerRequest.getCustomerName())
+                ||StringUtils.isEmptyOrWhitespace(customerRequest.getCustomerPsw())||StringUtils.isEmptyOrWhitespace(customerRequest.getMobile_numbers())
+        ){
+            throw new GlobalException("All fields are required");
         }
+
         Customer customer = customerRepo.findByCustomerEmail(customerRequest.getCustomerEmail());
         if (customer != null){
             return customer;
         }
         else {
-            Customer customer1 = new Customer();
-            customer1.setCustomerName(customerRequest.getCustomerName());
-            customer1.setCustomerEmail(customerRequest.getCustomerEmail());
-            customer1.setCustomerPsw(passwordEncoder.encode(customer1.getCustomerPsw()));
+            Customer newCustomer = new Customer();
+            newCustomer.setCustomerName(customerRequest.getCustomerName());
+            newCustomer.setCustomerEmail(customerRequest.getCustomerEmail());
+            newCustomer.setCustomerPsw(passwordEncoder.encode(newCustomer.getCustomerPsw()));
             if (customerRequest.getCustomerEmail().endsWith("@gmail.com")){
-                customer1.setRoles(UserRoles.CUSTOMER);
+                newCustomer.setRoles(UserRoles.CUSTOMER);
             }
-            customerRepo.save(customer1);
+            customerRepo.save(newCustomer);
 
             Contact contact = new Contact();
             contact.setContacts(customerRequest.getMobile_numbers());
-            contact.setCustomer(customer1);
+            contact.setCustomer(newCustomer);
             contactRepo.save(contact);
 
-            return customer1;
+            return newCustomer;
         }
     }
+
 }

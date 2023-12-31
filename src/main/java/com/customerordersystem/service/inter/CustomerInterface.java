@@ -5,4 +5,5 @@ import com.customerordersystem.entity.Customer;
 
 public interface CustomerInterface {
     Customer retrieveCustomer(CustomerRequest customerRequest);
+
 }

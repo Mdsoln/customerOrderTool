@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests((authorise)->
                         authorise
-                                .requestMatchers("/api/purchase")
+                                .requestMatchers("/api/users/customer","/api/users/supplier","/api/purchase/order","/api/users/orderedProducts")
                                 .permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(
